@@ -8,11 +8,13 @@ let options = {
 let day = date.toLocaleDateString('en-US', options);
 document.getElementById("nameOfDay").innerHTML = day;
 
-//array for changing background colors
+//array for changing  backgroundColors
 
-const colors = ['#edf2fb', '#fce1e4', '#d7e3fc', '#ccdbfd', '#daeaf6', '#c1d3fe', '#abc4ff',
-    '#e8dff5', '#fcf4dd', '#ddedea']
+const backgroundColors = ['#aec5ed','#f7b3ba','#b8fb9b','#ccb8e9','#f6dd97']
 
+const quoteColors=['#edf2fb', '#fce1e4', '#dbfdcc', '#e8dff5', '#fcf4dd']
+
+    
 //generate quote
 
 const quote = ['The purpose of our lives is to be happy', 'Life is what happens when you’re busy making other plans', 'Get busy living or get busy dying', 'You only live once, but if you do it right, once is enough',
@@ -21,17 +23,43 @@ const quote = ['The purpose of our lives is to be happy', 'Life is what happens 
 ]
 const author = ['- Dalai Lama', '- John Lennon', '- Stephen King', '- Mae West', '- Thomas A. Edison', '- Albert Einstein', '- Babe Ruth', '- Will Smith']
 
-//changing background color everytime page refreshes
 
-let pickNumber=Math.floor(Math.random()*colors.length);
-document.body.style.background=colors[pickNumber];
+//change the placeholder according to the timezone
+let temp_time=new Date();
+let time=temp_time.getHours();
+
+console.log(time);
+
+if(time>=00 && time<12)
+   document.getElementById("timeOfDay").innerText="morning";
+else if(time>=12 && time<16)
+document.getElementById("timeOfDay").innerText="afternoon";
+else if(time>=16 && time<20 )
+document.getElementById("timeOfDay").innerText="evening";
+else
+document.getElementById("timeOfDay").innerText="night";
+
+
+//changing background color everytime page refreshes
 
 //getting the quote to be displayed at the quote area
 
-let pickQuoteNumber=Math.floor(Math.random()*quote.length);
-document.getElementById("quote").innerText=quote[pickQuoteNumber];
-document.getElementById("author_name").innerText=author[pickQuoteNumber];
 
 //changing the color of the heading
 
-document.getElementsByClassName("heading").style.color=colors[pickNumber];
+
+document.getElementById("new_quote_button").addEventListener("click",()=>{
+
+    
+let pickNumber=Math.floor(Math.random()*backgroundColors.length);
+document.body.style.background=backgroundColors[pickNumber];
+document.getElementById("new_quote_button").style.backgroundColor=backgroundColors[pickNumber];
+
+// document.getElementsByClassName("heading").style.color=backgroundColors[pickNumber];
+let pickQuoteNumber=Math.floor(Math.random()*quote.length);
+document.getElementById("quote").innerText=quote[pickQuoteNumber];
+document.getElementById("author_name").innerText=author[pickQuoteNumber];
+document.getElementById("quote_area").style.backgroundColor=quoteColors[pickNumber];
+})
+
+//changing the color of the button
